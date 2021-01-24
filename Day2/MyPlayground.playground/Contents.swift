@@ -55,3 +55,51 @@ favoriteIceCream["A"] // nil
 favoriteIceCream["A", default: "Unknown"] // Unknown
 
 
+// MARK: 7
+
+var teams = [String: String]() // empty dictionaly
+teams["Paul"] = "Red"
+
+var results = [Int]()
+var words = Set<String>()
+var numbers = Set<Int>()
+
+var scores = Dictionary<String, Int>()
+results = Array<Int>()
+
+// MARK: 8
+
+enum Result {
+    case success
+    case failure
+}
+
+Result.failure
+// MARK: 9
+enum Activity {
+    case bored
+    case running
+    case talking(topic: String)
+    case singing(volume: Int)
+}
+
+let talking = Activity.talking(topic: "football")
+talking
+
+switch talking {
+case .talking(let topic):
+    print(topic)
+default:
+    print("a")
+}
+
+// MARK: 10
+
+enum Planet: Int {
+    case mercury = 1
+    case venus
+    case earth
+    case mars
+}
+
+let earth = Planet(rawValue: 2) // venus
