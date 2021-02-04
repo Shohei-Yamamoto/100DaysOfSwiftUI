@@ -59,3 +59,44 @@ print("\(songs2)")
 // MARK: 6
 var person = ["first": "Shohei", "last": "Yamamoto", "month": "July"]
 person["month"]
+
+// MARK: 7
+
+var action: String
+var person2 = "hater"
+
+if person2 == "hater" {
+    action = "hate"
+} else {
+    action = "like"
+}
+
+
+// MARK: 8
+for i in 1...10 {
+    print("\(i)")
+}
+
+var str = "Fakers gonna"
+
+for _ in 1...5
+{
+    str += " fake"
+}
+print(str)
+
+
+// MARK: 9
+let studioAlbums = 5
+
+switch studioAlbums {
+case 0...1:
+    print("You're just starting out")
+case 2...3:
+    print("You're a rising star")
+
+case 4...5:
+    print("You're world famous!")
+default:
+    print("Have you done something new?")
+}
