@@ -60,3 +60,39 @@ getHaterStatus(weather: WeatherType.wind(speed: 100))
 getHaterStatus(weather: WeatherType.wind(speed: 1))
 
 
+// MARK: struct
+struct Person {
+    var clothes: String
+    var shoes: String
+}
+
+let taylor = Person(clothes: "T-shirts", shoes: "sneakers")
+let other = Person(clothes: "short skirts", shoes: "high heels")
+
+var taylorCopy = taylor
+taylorCopy.shoes = "flip flops"
+
+print(taylor)
+print(taylorCopy)
+
+
+// MARK: class
+class Singer {
+    var name: String
+    var age: Int
+
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+
+    @objc func sing() {
+        print("La la la la")
+    }
+}
+
+var taylorswift = Singer(name: "Taylor", age: 25)
+taylorswift.name
+taylorswift.age
+taylorswift.sing()
+
