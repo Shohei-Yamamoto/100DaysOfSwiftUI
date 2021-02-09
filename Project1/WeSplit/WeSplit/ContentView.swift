@@ -11,7 +11,7 @@ struct ContentView: View {
     
     // text
     @State private var checkAmount = ""
-    @State private var numberOfPeople = 2
+    @State private var numberOfPeopleText = ""
     @State private var tipPercentage = 2
     let tipPercentages = [10, 15, 20, 25, 0]
     
@@ -24,30 +24,18 @@ struct ContentView: View {
     }
 
     var totalPerPerson: Double {
-        let peopleCount = Double(numberOfPeople + 2)
-        let tipSelection = Double(tipPercentages[tipPercentage])
-        let orderAmount = Double(checkAmount) ?? 0
-        
-        let tipValue = orderAmount / 100 * tipSelection
-        let grandTotal = orderAmount + tipValue
-        let amountPerPerson = grandTotal / peopleCount
-        
-        return amountPerPerson
+        let peopleCount = Double(numberOfPeopleText) ?? 1
+        return totalAmount / peopleCount
     }
 
-
-    @State private var selectedStudent = 0
     var body: some View {
         NavigationView {
             Form {
                 Section {
                     TextField("Amount", text: $checkAmount)
                         .keyboardType(.decimalPad)
-                    Picker("Number of people", selection: $numberOfPeople) {
-                        ForEach(2 ..< 100) {
-                            Text("\($0) people")
-                        }
-                    }
+                    TextField("Number of people", text: $numberOfPeopleText)
+                        .keyboardType(.decimalPad)
                 }
                 
                 Section(header: Text("How much tip do you want to leave?")) {
