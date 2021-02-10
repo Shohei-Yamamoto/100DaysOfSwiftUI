@@ -11,40 +11,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 10
-        ) {
-//            Color.yellow // safe areaだけ
-//            Color.yellow.frame(width: 200, height: 200, alignment:  .center) // 指定
-            Color.yellow.edgesIgnoringSafeArea(.all) // safe area外も
-            HStack(alignment: .top, spacing: 20) {
-                Text("Hello World")
-                Text("Hello World")
-                ZStack {
-                    Color.yellow.frame(width: 100, height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    Text("Hello World")
-                    Text("hello world")
-                        .background(Color.red)
-                }
-            }
-            HStack {
-                Spacer()
-                Text("Hello World")
-                Text("Hello World")
-                Text("Hello World")
-            }
-            HStack {
-                Text("Hello World")
-                Text("Hello World")
-                Text("Hello World")
-            }             .background(Color.green)
-
-        }
+        LinearGradient(gradient: Gradient(colors: [.black,.white]), startPoint: .leading, endPoint: .trailing)
+        RadialGradient(gradient: Gradient(colors: [.red, .yellow]), center: .center, startRadius: 5
+                       , endRadius: 500)
+        AngularGradient(gradient: Gradient(colors: [.yellow,.red,.blue,.green, .purple]), center: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/ )
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
+            
             ContentView()
             ContentView()
                 .previewDevice("iPhone X")
