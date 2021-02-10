@@ -10,16 +10,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showingAlert = false
+    
     var body: some View {
-        Button("Tap me!") {
-            print("tapped")
+        
+        
+        Button("showing Alert"){
+            self.showingAlert = true
+        }.alert(isPresented: $showingAlert) {
+            Alert(title: Text("Hello Swift UI!"), message: Text("detail message"), dismissButton: .default(Text("OK")))
         }
-        Button(action: {
-            print("a")
-        }, label: {
-            Image(systemName: "pencil")
-            Text("Tap me!")
-        })
     }
 }
 
