@@ -11,10 +11,15 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [.black,.white]), startPoint: .leading, endPoint: .trailing)
-        RadialGradient(gradient: Gradient(colors: [.red, .yellow]), center: .center, startRadius: 5
-                       , endRadius: 500)
-        AngularGradient(gradient: Gradient(colors: [.yellow,.red,.blue,.green, .purple]), center: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/ )
+        Button("Tap me!") {
+            print("tapped")
+        }
+        Button(action: {
+            print("a")
+        }, label: {
+            Image(systemName: "pencil")
+            Text("Tap me!")
+        })
     }
 }
 
