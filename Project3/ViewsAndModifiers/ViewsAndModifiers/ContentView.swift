@@ -7,39 +7,58 @@
 
 import SwiftUI
 
+struct GryffText: View {
+    var test: String
+    var body: some View {
+        Text("Gryffindor! \(test)")
+    }
+}
+
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.white)
+            .background(Color.blue)
+    }
+}
+
+struct Watermark: ViewModifier {
+    var text: String
+    
+    func body(content: Content) -> some View {
+        ZStack(alignment: .bottomTrailing) {
+            content
+            Text(text)
+                .font(.caption)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.black)
+        }
+    }
+}
+
+extension View {
+    func titleStyle() -> some View {
+        self.modifier(Title())
+    }
+}
+
 struct ContentView: View {
-    // opaque return types = some View
-    
-    let motto1 = Text("Draco dormiens")
-    let motto2 = Text("numquam titillandus")
-    
-    @State private var useRedText = false
     
     var body: some View {
         VStack {
-            VStack {
-                Text("Gryffindor")
-                    .blur(radius: 0)
-                Text("Hufflepuff")
-            }
-            .blur(radius: 3)
-            // blur is a regular modifier
-            
-            VStack {
-                Text("Gryffindor")
-                    .font(.largeTitle)
-                Text("Hufflepuff")
-                motto1
-                motto2
-            }
-            .font(.title3)
-            // font is an Environment modifier
+            Text("body")
+                .modifier(Title())
+            Text("body")
+                .titleStyle()
+            Color.blue
+                .frame(width: 200, height: 200)
+                .modifier(Watermark(text: "add"))
         }
-        
-        
-
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
