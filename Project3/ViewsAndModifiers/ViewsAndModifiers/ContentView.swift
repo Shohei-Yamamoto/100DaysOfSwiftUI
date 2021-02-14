@@ -10,6 +10,9 @@ import SwiftUI
 struct ContentView: View {
     // opaque return types = some View
     
+    let motto1 = Text("Draco dormiens")
+    let motto2 = Text("numquam titillandus")
+    
     @State private var useRedText = false
     
     var body: some View {
@@ -26,6 +29,8 @@ struct ContentView: View {
                 Text("Gryffindor")
                     .font(.largeTitle)
                 Text("Hufflepuff")
+                motto1
+                motto2
             }
             .font(.title3)
             // font is an Environment modifier
