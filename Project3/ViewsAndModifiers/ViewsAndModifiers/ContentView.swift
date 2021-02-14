@@ -14,14 +14,23 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("hello")
-            Button("Hello World") {
-                print(type(of: self.body))
-                useRedText = !useRedText
+            VStack {
+                Text("Gryffindor")
+                    .blur(radius: 0)
+                Text("Hufflepuff")
             }
-            .frame(width: 200, height: 200)
-            .background(useRedText ? Color.red : Color.blue)
+            .blur(radius: 3)
+            // blur is a regular modifier
+            
+            VStack {
+                Text("Gryffindor")
+                    .font(.largeTitle)
+                Text("Hufflepuff")
+            }
+            .font(.title3)
+            // font is an Environment modifier
         }
+        
         
 
     }
