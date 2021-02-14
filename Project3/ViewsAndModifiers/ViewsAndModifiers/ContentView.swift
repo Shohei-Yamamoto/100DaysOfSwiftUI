@@ -7,56 +7,40 @@
 
 import SwiftUI
 
-struct GryffText: View {
-    var test: String
-    var body: some View {
-        Text("Gryffindor! \(test)")
-    }
-}
 
-struct Title: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .foregroundColor(.white)
-            .background(Color.blue)
-    }
-}
-
-struct Watermark: ViewModifier {
-    var text: String
+struct GridStack<Content: View>: View {
+    let rows: Int
+    let columns: Int
+    let content: (Int, Int) -> Content
     
-    func body(content: Content) -> some View {
-        ZStack(alignment: .bottomTrailing) {
-            content
-            Text(text)
-                .font(.caption)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.black)
+    var body: some View {
+        VStack {
+            ForEach(0..<rows, id: \.self)  { row in
+                HStack {
+                    ForEach(0..<self.columns, id: \.self) { column in
+                        self.content(row, column)
+                    }
+                }
+            }
         }
     }
-}
-
-extension View {
-    func titleStyle() -> some View {
-        self.modifier(Title())
+    init(rows: Int, columns: Int, @ViewBuilder content: @escaping (Int, Int) -> Content) {
+        self.rows = rows
+        self.columns = columns
+        self.content = content
     }
 }
 
 struct ContentView: View {
     
     var body: some View {
-        VStack {
-            Text("body")
-                .modifier(Title())
-            Text("body")
-                .titleStyle()
-            Color.blue
-                .frame(width: 200, height: 200)
-                .modifier(Watermark(text: "add"))
+        GridStack(rows: 4, columns: 4) { row, col in
+            Image(systemName: "\(row * 4 + col).circle")
+            Text("R\(row) C\(col)")
         }
     }
 }
+
 
 
 
