@@ -31,16 +31,7 @@ struct ContentView: View {
                         .fontWeight(.black)
                 }
                 ForEach(0 ..< 3) {
-                    number in
-                    Button(action: {
-                        self.flagTapped(number)
-                    }, label: {
-                        Image(self.countries[number])
-                            .renderingMode(.original)
-                            .clipShape(Capsule())
-                            .overlay(Capsule().stroke(Color.black, lineWidth: 2))
-                            .shadow(color: .black, radius: 2)
-                    })
+                    FlagImage(country: self.countries[$0], number: $0, action: self.flagTapped(_:))
                 }
                 Text("Your score is \(score) now")
                     .foregroundColor(.white)
@@ -68,6 +59,24 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+    }
+}
+
+struct FlagImage: View {
+    let country: String
+    let number: Int
+    let action: (Int) -> Void
+    
+    var body: some View {
+        Button(action: {
+            self.action(number)
+        }, label: {
+            Image(self.country)
+                .renderingMode(.original)
+                .clipShape(Capsule())
+                .overlay(Capsule().stroke(Color.black, lineWidth: 2))
+                .shadow(color: .black, radius: 2)
+        })
     }
 }
 
