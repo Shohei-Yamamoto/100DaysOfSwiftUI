@@ -52,6 +52,7 @@ struct ContentView: View {
                 
                 Section(header: Text("Total Amount")) {
                     Text("$\(totalAmount, specifier: "%.2f")")
+                        .foregroundColor( tipPercentages[tipPercentage] == 0 ? Color.red : Color.primary)
                 }
                 
             }
@@ -60,7 +61,12 @@ struct ContentView: View {
         }
         
     }
+    
+
 }
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
