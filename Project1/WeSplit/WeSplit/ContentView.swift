@@ -48,6 +48,9 @@ struct ContentView: View {
                 
                 Section(header: Text("Amount per person")) {
                     Text("$\(totalPerPerson, specifier: "%.2f")")
+                    ForEach(["a", "b", "a"], id: \.self, content: {
+                        Text($0)
+                    })
                 }
                 
                 Section(header: Text("Total Amount")) {
