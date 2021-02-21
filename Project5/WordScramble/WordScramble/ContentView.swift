@@ -9,32 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            List(0..<5) {
-                Text("Dynamic \($0)")
+        
+        if let fileURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
+            if let fileContents = try? String(contentsOf: fileURL) {
+                Text(fileContents)
             }
-            
-            
-            List {
-                
-                Section(header: Text("Section 1")){
-                    Text("Hello")
-                    Text("Hello")
-                    Text("Hello")
-                }
-                
-                Section(header: Text("Section 2")){
-                    ForEach(0..<5) {
-                        Text("Dynamic row \($0)")
-                    }
-                }
-                
-                Section(header: Text("Section 3")){
-                    Text("Hello")
-                    Text("Hello")
-                }
-            }
-            .listStyle(GroupedListStyle())
         }
     }
 }
