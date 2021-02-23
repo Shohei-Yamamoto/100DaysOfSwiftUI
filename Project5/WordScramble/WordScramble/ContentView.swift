@@ -48,6 +48,16 @@ struct ContentView: View {
             return
         }
         
+        guard isThreeOrMoreLetters(word: answer) else {
+            wordError(title: "Word is too short!", message: "Use more complex word. more than 2.")
+            return
+        }
+        
+        guard isDifferentFromStartWord(word: answer) else {
+            wordError(title: "Same as Question!", message: "You can't use the original word itself")
+            return
+        }
+        
         guard isPossible(word: answer) else {
             wordError(title: "Word not recognized", message: "You can't just make them up, you know")
             return
@@ -78,6 +88,14 @@ struct ContentView: View {
     
     func isOriginal(word: String) -> Bool {
         !usedWords.contains(word)
+    }
+    
+    func isThreeOrMoreLetters(word: String) -> Bool {
+        word.count >= 3
+    }
+    
+    func isDifferentFromStartWord(word: String) -> Bool {
+        word != rootWord
     }
     
     func isPossible(word: String) -> Bool {
