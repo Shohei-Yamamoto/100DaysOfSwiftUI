@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var usedWords = [String]()
     @State private var rootWord = ""
     @State private var newWord = ""
+    @State private var score = 0
     
     @State private var errorTitle = ""
     @State private var errorMessage = ""
@@ -28,7 +29,11 @@ struct ContentView: View {
                     Image(systemName: "\($0.count).circle")
                     Text($0)
                 }
+                
+                Text("Your score is \(score)")
+                    .padding()
             }.navigationBarTitle(Text(rootWord))
+            .navigationBarItems(leading: Button("startGame", action: startGame))
             .onAppear(perform: startGame)
             .alert(isPresented: $showingError) {
                 Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
@@ -70,7 +75,12 @@ struct ContentView: View {
         
         usedWords.insert(answer, at: 0)
         newWord = ""
-        startGame()
+        score += answer.count
+    }
+    
+    private func reset() {
+        score = 0
+        usedWords = [String]()
     }
     
     func startGame() {
@@ -78,6 +88,8 @@ struct ContentView: View {
             if let startWords = try? String(contentsOf: startWordsURL) {
                 let allWords = startWords.components(separatedBy: "\n")
                 rootWord = allWords.randomElement() ?? "silkworm"
+                
+                reset()
                 
                 return
             }
