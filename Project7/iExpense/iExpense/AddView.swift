@@ -11,6 +11,8 @@ struct AddView: View {
     @State private var name = ""
     @State private var type = "Personal"
     @State private var amount = ""
+    @State private var isShowingErrorAlert = false
+    @State private var errorAlertMessage = ""
     
     @ObservedObject var expenses: Expenses
     
@@ -37,8 +39,14 @@ struct AddView: View {
                     let item = ExpenseItem(name: self.name, type: self.type, amount: actualAmount)
                     self.expenses.items.append(item)
                     presentationMode.wrappedValue.dismiss()
+                } else {
+                    errorAlertMessage = "You should set number to Amount!"
+                    isShowingErrorAlert = true
                 }
             })
+            .alert(isPresented: $isShowingErrorAlert){
+                Alert(title: Text("Warning!"), message: Text(errorAlertMessage), dismissButton: .default(Text("OK")))
+            }
         }
     }
 }
