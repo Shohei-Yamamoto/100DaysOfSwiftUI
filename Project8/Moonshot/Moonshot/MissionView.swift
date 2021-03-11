@@ -28,23 +28,27 @@ struct MissionView: View {
                         .padding()
                     
                     ForEach(self.astronauts, id:\.role) { crewMember in
-                        HStack {
-                            Image(crewMember.astronaut.id)
-                                .resizable()
-                                .frame(width: 83, height: 60)
-                                .clipShape(Capsule())
-                                .overlay(Capsule().stroke(Color.primary, lineWidth: 1))
-                            
-                            VStack(alignment: .leading, content: {
-                                Text(crewMember.astronaut.name)
-                                    .font(.headline)
-                                Text(crewMember.role)
-                                    .foregroundColor(.secondary)
-                            })
-                            
-                            Spacer()
+                        
+                        NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut)) {
+                            HStack {
+                                Image(crewMember.astronaut.id)
+                                    .resizable()
+                                    .frame(width: 83, height: 60)
+                                    .clipShape(Capsule())
+                                    .overlay(Capsule().stroke(Color.primary, lineWidth: 1))
+                                
+                                VStack(alignment: .leading, content: {
+                                    Text(crewMember.astronaut.name)
+                                        .font(.headline)
+                                    Text(crewMember.role)
+                                        .foregroundColor(.secondary)
+                                })
+                                
+                                Spacer()
+                            }
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
+                        .buttonStyle(PlainButtonStyle())
                         
                         
                     }
@@ -52,8 +56,9 @@ struct MissionView: View {
                     Spacer(minLength: 25)
                 }
             }
+            
+            .navigationBarTitle(Text(mission.displayName), displayMode: .inline)
         }
-        .navigationBarTitle(Text(mission.displayName), displayMode: .inline)
     }
     
     init(mission: Mission, astronauts: [Astronaut]) {
