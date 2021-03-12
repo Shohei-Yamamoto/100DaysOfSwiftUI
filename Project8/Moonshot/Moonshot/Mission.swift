@@ -35,4 +35,8 @@ struct Mission: Codable, Identifiable {
             return "N/A"
         }
     }
+    
+    var crewNames: String {
+        return self.crew.reduce("", {$0 + " " + $1.name})
+    }
 }
