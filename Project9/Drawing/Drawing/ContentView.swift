@@ -74,18 +74,9 @@ struct ContentView: View {
     @State private var petalWidth = 100.0
     
     var body: some View {
-        VStack {
-            Flower(petalOffset: petalOffset, petalWidth: petalWidth)
-                .fill(Color.red, style: FillStyle(eoFill: true))
-            
-            Text("Offset")
-            Slider(value: $petalOffset, in: -40...40)
-                .padding([.horizontal, .bottom])
-            
-            Text("Width")
-            Slider(value: $petalWidth, in: 0...100)
-            
-        }
+        Capsule()
+            .border(ImagePaint(image: Image("Example"), scale: 0.1), width: 20)
+            .frame(width: 300, height: 200)
 
     }
 }
