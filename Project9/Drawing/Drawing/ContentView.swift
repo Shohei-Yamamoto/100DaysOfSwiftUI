@@ -8,42 +8,47 @@
 import SwiftUI
 
 
-struct ColorCyclingCircle: View {
-    var amount = 0.0
-    var steps = 100
-    
-    var body: some View {
-        ZStack {
-            ForEach(0..<steps) {value in
-                Circle()
-                    .inset(by: CGFloat(value))
-                    .strokeBorder(LinearGradient(gradient: Gradient(colors: [self.color(for: value, brightness: 1), self.color(for: value, brightness: 0.5)]), startPoint: .leading, endPoint: .trailing), lineWidth: 2)
-            }
-        }.drawingGroup()
-    }
-    
-    func color(for value: Int, brightness: Double) -> Color {
-        var targetHue = Double(value) / Double(self.steps) + self.amount
-        
-        if targetHue > 1 {
-            targetHue -= 1
-        }
-        
-        return Color(hue: targetHue, saturation: 1, brightness: brightness)
-    }
-}
-
 struct ContentView: View {
-    @State private var colorCycle = 0.0
+    @State private var amount: CGFloat = 0.0
     
     var body: some View {
         VStack {
-            ColorCyclingCircle(amount: self.colorCycle)
-                .frame(width: 300, height: 300)
+            ZStack {
+                Image("Example")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200, alignment: .center)
+                    .saturation(Double(amount))
+                    .blur(radius: (1-amount) * 20)
+                
+                Circle()
+                    .fill(Color.red)
+                    .frame(width: 200 * amount)
+                    .offset(x: -50, y: -80)
+                    .blendMode(.screen)
+                
+                Circle()
+                    .fill(Color.green)
+                    .frame(width: 200 * amount)
+                    .offset(x: 50 ,y: -80)
+                    .blendMode(.screen)
+                
+                Circle()
+                    .fill(Color.blue)
+                    .frame(width: 200 * amount)
+                    .blendMode(.screen)
+                    
+            }
+            .frame(width: 300, height: 300)
             
-            Slider(value: $colorCycle)
+            Slider(value: $amount)
+                .padding()
         }
-
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black)
+        .edgesIgnoringSafeArea(.all)
+        
+    
     }
 }
 
