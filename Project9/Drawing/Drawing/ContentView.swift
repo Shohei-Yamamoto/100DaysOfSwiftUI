@@ -9,7 +9,12 @@ import SwiftUI
 
 struct Arrow: Shape {
     let headHeight: CGFloat
-    let lineTickness: CGFloat
+    var lineTickness: CGFloat
+    
+    var animatableData: CGFloat {
+        get { lineTickness }
+        set { self.lineTickness = newValue }
+    }
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -25,11 +30,20 @@ struct Arrow: Shape {
     }
 }
 struct ContentView: View {
+    @State private var lineTickness: CGFloat = 50.0
     
     var body: some View {
-        Arrow(headHeight: 100 ,lineTickness: 50)
-            .frame(width: 110, height: 200)
-            .foregroundColor(.red)
+        VStack {
+            Arrow(headHeight: 100 ,lineTickness: lineTickness)
+                .frame(width: 110, height: 200)
+                .foregroundColor(.red)
+            Button("Tap!"){
+                withAnimation {
+                    lineTickness = CGFloat.random(in: 1...100)
+                }
+            }
+        }
+        
     }
 }
 
