@@ -16,10 +16,16 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(activityList.activities) { activity in
+                ForEach(0..<activityList.activities.count) { i in
                     HStack {
-                        Text(activity.title)
-                        Text(activity.description)
+                        NavigationLink(
+                            destination: DetailView(activity: $activityList.activities[i]),
+                            label: {
+                                Text(activityList.activities[i].title)
+                            })
+//                        NavigationLink(Text(activityList.activities[i].title), destination: {
+//                            DetailView(activity: activityList.activities[i])
+//                        })
                     }
                 }
             }
@@ -42,6 +48,26 @@ struct ContentView: View {
                     })
                 }
             }
+        }
+    }
+}
+
+struct DetailView: View {
+    @Binding var activity: Activity
+    
+    var body: some View {
+        VStack {
+            Text(activity.title)
+                .font(.title)
+            Text(activity.description)
+                .font(.caption)
+            Text("\(activity.count)")
+            Button(action: {
+                activity.count += 1
+            }, label: {
+                Image(systemName: "plus")
+                    .font(.title)
+            })
         }
     }
 }

@@ -17,6 +17,13 @@ class ActivityList: ObservableObject {
 
 struct Activity: Identifiable {
     let id = UUID()
-    let title: String
-    let description: String
+    var title: String
+    var description: String
+    var count: Int
+    
+    init(title: String, description: String, count: Int = 0) {
+        self.title = title
+        self.description = description
+        self.count = count
+    }
 }
