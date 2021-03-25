@@ -16,13 +16,9 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(0..<activityList.activities.count) { i in
+                ForEach(activityList.activities) { activity in
                     HStack {
-                        NavigationLink(
-                            destination: DetailView(activity: $activityList.activities[i]),
-                            label: {
-                                Text(activityList.activities[i].title)
-                            })
+                        Text(activity.title)
 //                        NavigationLink(Text(activityList.activities[i].title), destination: {
 //                            DetailView(activity: activityList.activities[i])
 //                        })
@@ -63,7 +59,7 @@ struct DetailView: View {
                 .font(.caption)
             Text("\(activity.count)")
             Button(action: {
-                activity.count += 1
+                // TODO
             }, label: {
                 Image(systemName: "plus")
                     .font(.title)
