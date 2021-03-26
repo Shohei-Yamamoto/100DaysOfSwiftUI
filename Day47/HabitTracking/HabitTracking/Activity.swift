@@ -8,15 +8,29 @@
 import Foundation
 
 class ActivityList: ObservableObject {
-    @Published var activities: [Activity]
+    @Published var activities: [Activity] {
+        didSet {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(activities) {
+                UserDefaults.standard.setValue(encoded ,forKeyPath: "Activity")
+            }
+        }
+    }
     
     init(activities: [Activity] = [Activity]()) {
-        self.activities = activities
+        if let activities = UserDefaults.standard.data(forKey: "Activity") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Activity].self, from: activities) {
+                self.activities = decoded
+                return
+            }
+        }
+        self.activities = []
     }
 }
 
-struct Activity: Identifiable {
-    let id = UUID()
+struct Activity: Identifiable, Codable {
+    var id = UUID()
     var title: String
     var description: String
     var count: Int

@@ -18,10 +18,7 @@ struct ContentView: View {
             List {
                 ForEach(activityList.activities) { activity in
                     HStack {
-                        Text(activity.title)
-//                        NavigationLink(Text(activityList.activities[i].title), destination: {
-//                            DetailView(activity: activityList.activities[i])
-//                        })
+                        NavigationLink(activity.title, destination: Text("\(activity.description)"))
                     }
                 }
             }
