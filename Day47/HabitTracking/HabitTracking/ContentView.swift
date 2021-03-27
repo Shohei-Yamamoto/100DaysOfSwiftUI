@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var activityList: ActivityList
+    @ObservedObject var activityList: ActivityList = ActivityList()
     @State var isPresentSheet = false
     @State var title: String = ""
     @State var description: String = ""
@@ -18,7 +18,9 @@ struct ContentView: View {
             List {
                 ForEach(activityList.activities) { activity in
                     HStack {
-                        NavigationLink(activity.title, destination: Text("\(activity.description)"))
+                        if let i = activityList.activities.firstIndex{$0.id == activity.id} {
+                            NavigationLink(activityList.activities[i].title, destination: DetailView(activityList: activityList, index: i))
+                        }
                     }
                 }
             }
@@ -46,10 +48,18 @@ struct ContentView: View {
 }
 
 struct DetailView: View {
-    @Binding var activity: Activity
+    var activityList: ActivityList
+    var index: Int
+    
+    private var activity: Activity {
+        get {
+            activityList.activities[index]
+        }
+    }
     
     var body: some View {
         VStack {
+            
             Text(activity.title)
                 .font(.title)
             Text(activity.description)
