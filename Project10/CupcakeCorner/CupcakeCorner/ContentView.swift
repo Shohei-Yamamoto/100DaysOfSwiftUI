@@ -9,27 +9,47 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State private var username = ""
-    @State private var email = ""
+    @ObservedObject var order = Order()
     var body: some View {
-        Form {
-            Section {
-                TextField("Username", text: $username)
-                TextField("Email", text: $email)
-            }
-            
-            Section {
-                Button("Create Account") {
-                    print("Creating account...")
+        NavigationView {
+            Form {
+                Section {
+                    Picker("Select your cake type", selection: $order.type){
+                        ForEach(0..<Order.types.count){
+                            Text("\(Order.types[$0])")
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    Stepper(value: $order.quantity, in: 3...20) {
+                        Text("Number of cupcakes \(order.quantity)")
+                    }
                 }
+                
+                Section {
+                    Toggle("Special", isOn: $order.specialRequestEnabled.animation())
+                    
+                    if order.specialRequestEnabled {
+                        
+                        Toggle("Sprinkles", isOn: $order.addSprinkles)
+                        Toggle("Extra Frosting", isOn: $order.extraFrosting)
+                    }
+                    
+                }
+                
+                Section {
+                    NavigationLink(
+                        destination: AddressView(order: order),
+                        label: {
+                            Text("Delivery Details")
+                        })
+                }
+                
             }
-            .disabled(username.isEmpty || email.isEmpty)
+            .navigationTitle("Cupcake Corner")
         }
-        
-        
     }
     
-
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
