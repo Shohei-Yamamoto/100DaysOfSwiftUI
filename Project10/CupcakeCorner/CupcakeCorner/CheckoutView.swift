@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CheckoutView: View {
-    @ObservedObject var order: Order
+    @ObservedObject var order: OrderModel
     @State private var confirmationMessage = ""
     @State private var showingConfirmation = false
     var body: some View {
@@ -18,7 +18,7 @@ struct CheckoutView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: geo.size.width)
-                Text("Your total is $\(self.order.cost, specifier: "%.2f")")
+                Text("Your total is $\(self.order.order.cost, specifier: "%.2f")")
                     .font(.title)
                 Button("Place Order") {
                     self.placeOrder()
@@ -32,7 +32,7 @@ struct CheckoutView: View {
     }
     
     func placeOrder() {
-        guard let encoded = try? JSONEncoder().encode(order) else {
+        guard let encoded = try? JSONEncoder().encode(order.order) else {
             print("Failed to encode order")
             return
         }
@@ -45,6 +45,8 @@ struct CheckoutView: View {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
+                confirmationMessage = "Error: Please check Network Connection"
+                showingConfirmation = true
                 print("No data in response: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
@@ -63,6 +65,6 @@ struct CheckoutView: View {
 
 struct CheckoutView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckoutView(order: Order())
+        CheckoutView(order: OrderModel(order: Order()))
     }
 }
