@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092645FB261DD8A300A2F051 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092645FA261DD8A300A2F051 /* PracticeView.swift */; };
 		09464B78261C65070089A430 /* BookwormApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09464B77261C65070089A430 /* BookwormApp.swift */; };
 		09464B7A261C65070089A430 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09464B79261C65070089A430 /* ContentView.swift */; };
 		09464B7C261C65080089A430 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09464B7B261C65080089A430 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		092645FA261DD8A300A2F051 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
 		09464B74261C65070089A430 /* Bookworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09464B77261C65070089A430 /* BookwormApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookwormApp.swift; sourceTree = "<group>"; };
 		09464B79261C65070089A430 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				09464B77261C65070089A430 /* BookwormApp.swift */,
 				09464B79261C65070089A430 /* ContentView.swift */,
+				092645FA261DD8A300A2F051 /* PracticeView.swift */,
 				09464B7B261C65080089A430 /* Assets.xcassets */,
 				09464B80261C65080089A430 /* Persistence.swift */,
 				09464B85261C65080089A430 /* Info.plist */,
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09464B81261C65080089A430 /* Persistence.swift in Sources */,
+				092645FB261DD8A300A2F051 /* PracticeView.swift in Sources */,
 				09464B84261C65080089A430 /* Bookworm.xcdatamodeld in Sources */,
 				09464B7A261C65070089A430 /* ContentView.swift in Sources */,
 				09464B78261C65070089A430 /* BookwormApp.swift in Sources */,
